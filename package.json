@@ -1,8 +1,9 @@
 {
   "name": "@adens_w/indexeddb",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "promise-based indexeddb",
   "main": "src/index.js",
+  "repository": "adensW/indexeddb",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
