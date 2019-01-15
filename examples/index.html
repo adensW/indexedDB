@@ -1,0 +1,86 @@
+<html>
+    <head>
+        
+    </head>
+    <body>
+        <div id="display"></div>
+        <script src="../src/index.js"></script>
+        <script>
+            // import {aidb} from '../src/index.js'
+            let display = document.getElementById("display")
+            aidb().open("DB_TestDB").createTable("mainTable",{keyPath: 'id'},{key:"subId",unique:true}).execude().then(()=>{
+                display.innerText="created"
+            }).catch((err)=>{
+                display.innerText='create failed'
+            });
+            aidb().open("DB_TestDB").add("mainTable",
+                {
+                    id:"1",
+                    subId:"1",
+                    params:{
+                        param1:"params1",
+                        param2:"params2",
+                    },
+                    arr:[1,2,3,4]
+                }).execude()
+            aidb().open("DB_TestDB").add("mainTable",
+                [{
+                    id:"2",
+                    subId:"2",
+                    params:{
+                        param1:"params1",
+                        param2:"params2",
+                    },
+                    arr:[1,2,3,4]
+                },
+                {
+                    id:"3",
+                    subId:"3",
+                    params:{
+                        param1:"params1",
+                        param2:"params2",
+                    },
+                    arr:[1,2,3,4]
+                },{
+                    id:"4",
+                    subId:"4",
+                    params:{
+                        param1:"params1",
+                        param2:"params2",
+                    },
+                    arr:[1,2,3,4]
+                },{
+                    id:"5",
+                    subId:"5",
+                    params:{
+                        param1:"params1",
+                        param2:"params2",
+                    },
+                    arr:[1,2,3,4]
+                }
+            ]).execude()
+            aidb().open("DB_TestDB").put("mainTable", {
+                    id:"5",
+                    subId:"5",
+                    newparams:{
+                        newparam1:"newparams1",
+                        newparam2:"params2",
+                    },
+                    arr:[1,2,3,4].reverse()
+                }).execude();
+                aidb().open("DB_TestDB").delete("mainTable", {
+                    id:"5",
+                    subId:"5",
+                    newparams:{
+                        newparam1:"newparams1",
+                        newparam2:"params2",
+                    },
+                    arr:[1,2,3,4].reverse()
+                }).execude();
+                aidb().open("DB_TestDB").get("mainTable", 5).then((result)=>{
+                    console.log(result)
+                });
+
+        </script>
+    </body>
+</html>

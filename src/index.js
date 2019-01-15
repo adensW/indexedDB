@@ -1,9 +1,3 @@
-//aidb 指向 aidb
-//this 指向 aidb.init
-//外界访问 aidb 指向 this 即 aidb.init
-//1私有函数 申明为 aidb
-//2公有函数 申明为 this 或在aidb.fn = aidb.prototype里声明
-// aidb.fn.init=function() 里申明 不为aidb.或者this.都无法访问
 const ERRORCODE = {
     INIT: 0,
     INITFAILED: -997,
@@ -172,7 +166,7 @@ let aidb = (function () {
         },
         get: function (storename, query) {
             //1.query== 1||"1"
-            //2.query==['1',2,,3]
+            //2.query==['1',2,3]
             //3.query=={id:1,props:"prop"}
             if (Array.isArray(query)) {
                 //[1,2,3]
@@ -214,7 +208,7 @@ let aidb = (function () {
                     dataArr.push({ value: data, state: STATE.ADD });
                 } else {
                     //2,[{},{},{}]
-                    dataArr = data;
+                    // dataArr = data;
                     for (let i = 0; i < data.length; i++) {
                         const element = data[i];
                         dataArr.push({ value: element, state: STATE.ADD })
@@ -231,7 +225,7 @@ let aidb = (function () {
                     dataArr.push({ value: data, state: STATE.ADD });
                 } else {
                     //2,[{},{},{}]
-                    dataArr = data;
+                    // dataArr = data;
                     for (let i = 0; i < data.length; i++) {
                         const element = data[i];
                         dataArr.push({ value: element, state: STATE.ADD })
@@ -253,7 +247,6 @@ let aidb = (function () {
                     dataArr.push({ value: data, state: STATE.UPDATE, id: id || data.id });
                 } else {
                     //2,[{},{},{}]
-                    dataArr = data;
                     for (let i = 0; i < data.length; i++) {
                         const element = data[i];
                         dataArr.push({ value: element, state: STATE.UPDATE, id: id || data.id })
@@ -270,7 +263,6 @@ let aidb = (function () {
                     dataArr.push({ value: data, state: STATE.UPDATE, id: id || data.id });
                 } else {
                     //2,[{},{},{}]
-                    dataArr = data;
                     for (let i = 0; i < data.length; i++) {
                         const element = data[i];
                         dataArr.push({ value: element, state: STATE.UPDATE, id: id || data.id })
@@ -292,7 +284,6 @@ let aidb = (function () {
                     dataArr.push({ value: data, state: STATE.DELETE, id: id || data.id });
                 } else {
                     //2,[{},{},{}]
-                    dataArr = data;
                     for (let i = 0; i < data.length; i++) {
                         const element = data[i];
                         dataArr.push({ value: element, state: STATE.DELETE, id: id || data.id })
@@ -386,11 +377,6 @@ let aidb = (function () {
         return target;
     };
     aidb.fn.init = function () {
-
-        //必须申明this或aidb 
-        //无法访问
-        // console.log('a')
-        //init
         aidb._initialize()
     }
     aidb.fn.init.prototype = aidb.fn;
@@ -399,7 +385,6 @@ let aidb = (function () {
     aidb.extend({
         isPlainObject: function (obj) {
             var proto, Ctor;
-
             // Detect obvious negatives
             // Use toString instead of jQuery.type to catch host objects
             if (!obj || toString.call(obj) !== "[object Object]") {
@@ -419,15 +404,13 @@ let aidb = (function () {
         }
     });
     aidb.fn.extend({
-        //外部 aidb 可以访问 公共方法
-        //内部可以通过this访问
+        
     });
     aidb.extend({
         //tools
     })
     aidb.extend({
-        //外界aidb 无法访问
-        //设置私有方法 内部使用 aidb.方法使用
+        
         _versionIncrease: function (name) {
             let promise = new Promise(function (resolve) {
                 aidb._getIndex(_default.database, _default.table, 'database', name).then(function (result) {
@@ -1014,4 +997,4 @@ let aidb = (function () {
     })
     return aidb;
 })();
-export { aidb };
+module.export = aidb;
