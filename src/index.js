@@ -997,4 +997,6 @@ let aidb = (function () {
     })
     return aidb;
 })();
+if(module.export){
 module.export = aidb;
+}
